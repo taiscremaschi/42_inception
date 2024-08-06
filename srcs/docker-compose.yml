@@ -1,0 +1,66 @@
+version: "3.7"
+
+
+
+
+services:
+  mariadb:
+    build: .
+    ports:
+      - "8000:5000"
+    container_name:
+    depends_on:
+      - 
+    env_file:
+      - 
+    networks:
+      - 
+    volumes:
+      -
+    
+  nginx:
+    build: .
+    ports:
+      - "8000:5000"
+    container_name:
+    depends_on:
+      - 
+    env_file:
+      - 
+    networks:
+      - 
+    volumes:
+      -
+    
+  wordpress:
+    build: .
+    ports:
+      - "8000:5000"
+    container_name:
+    depends_on:
+      - 
+    env_file:
+      - 
+    networks:
+      - 
+    volumes:
+      -
+
+
+volumes:
+  db-data:
+    driver: bind
+    driver_opts:
+      path: data/mariadb
+      
+  wordpress-data:
+    driver: bind
+    driver_opts:
+      path: data/wordpress
+
+networks:
+  # The presence of these objects is sufficient to define them
+  inception:
+
+    
+  

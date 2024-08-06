@@ -1,6 +1,8 @@
 
 FROM debian:bullseye
 
+RUN apt update && apt upgrade
+
 RUN apt install nginx -y
 
 #copia minha conf para a conf padrao do nginx
