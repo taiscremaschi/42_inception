@@ -44,14 +44,18 @@ services:
 
 volumes:
   db-data:
-    driver: bind
+    driver: local
     driver_opts:
       device: data/mariadb
+      type: none
+      o: bind
       
   wordpress-data:
-    driver: bind
+    driver: local
     driver_opts:
       device: data/wordpress
+      type: none
+      o: bind
 
 networks:
   # The presence of these objects is sufficient to define them
