@@ -7,7 +7,7 @@ services:
   mariadb:
     build: .
     ports:
-      - "8000:5000"
+      - "3306"
     container_name:
     depends_on:
       - 
@@ -16,12 +16,12 @@ services:
     networks:
       - 
     volumes:
-      -
+      -  db-data:/var/lib/mysql
     
   nginx:
     build: .
     ports:
-      - "8000:5000"
+      - "443"
     container_name:
     depends_on:
       - 
@@ -30,12 +30,12 @@ services:
     networks:
       - 
     volumes:
-      -
+      - wordpress-data:/var/www/html
     
   wordpress:
     build: .
     ports:
-      - "8000:5000"
+      - "9000"
     container_name:
     depends_on:
       - 
@@ -44,7 +44,7 @@ services:
     networks:
       - 
     volumes:
-      -
+      -  wordpress-data:/var/www/html
 
 
 volumes:
