@@ -1,48 +1,43 @@
 version: "3.7"
 
-
-
-
 services:
   mariadb:
-    build: .
+    build: requeriments/mariadb/
     ports:
       - "3306"
-    container_name:
-    depends_on:
-      - 
+    container_name: mari
     env_file:
-      - 
+      - .env
     networks:
-      - 
+      - inception
     volumes:
       -  db-data:/var/lib/mysql
     
   nginx:
-    build: .
+    build: requeriments/nginx/
     ports:
       - "443"
-    container_name:
+    container_name: ginx
     depends_on:
-      - 
+      - wordpress
     env_file:
-      - 
+      - .env
     networks:
-      - 
+      - inception
     volumes:
       - wordpress-data:/var/www/html
     
   wordpress:
-    build: .
+    build: requeriments/wordpress/
     ports:
       - "9000"
-    container_name:
+    container_name: wp
     depends_on:
-      - 
+      - mariadb
     env_file:
-      - 
+      - .env
     networks:
-      - 
+      - inception
     volumes:
       -  wordpress-data:/var/www/html
 
@@ -51,16 +46,17 @@ volumes:
   db-data:
     driver: bind
     driver_opts:
-      path: data/mariadb
+      device: data/mariadb
       
   wordpress-data:
     driver: bind
     driver_opts:
-      path: data/wordpress
+      device: data/wordpress
 
 networks:
   # The presence of these objects is sufficient to define them
   inception:
+    driver: bridge
 
     
   
