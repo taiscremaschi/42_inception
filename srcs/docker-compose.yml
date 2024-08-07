@@ -3,6 +3,7 @@ version: "3.7"
 services:
   mariadb:
     build: requeriments/mariadb/
+    restart: always
     ports:
       - "3306"
     container_name: mari
@@ -15,6 +16,7 @@ services:
     
   nginx:
     build: requeriments/nginx/
+    restart: always
     ports:
       - "443"
     container_name: ginx
@@ -29,6 +31,7 @@ services:
     
   wordpress:
     build: requeriments/wordpress/
+    restart: always
     ports:
       - "9000"
     container_name: wp
