@@ -18,7 +18,7 @@ services:
     build: requeriments/nginx/
     restart: always
     ports:
-      - "443"
+      - "443:443"
     container_name: ginx
     depends_on:
       - wordpress
@@ -33,7 +33,7 @@ services:
     build: requeriments/wordpress/
     restart: always
     ports:
-      - "9000"
+      - "9000:9000"
     container_name: wp
     depends_on:
       - mariadb
