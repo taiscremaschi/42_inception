@@ -46,7 +46,7 @@ volumes:
   db-data:
     driver: local
     driver_opts:
-      device: data/vol_maria
+      device: data/vol_maria 
       type: none
       o: bind
       

@@ -1,15 +1,12 @@
 FROM debian:bullseye
 
-RUN apt update && apt upgrade
+RUN apt update && apt upgrade -y
 
-RUN apt install mariadb-server
+RUN apt install mariadb-server -y
 
-COPY ./docker-entrypoint.sh /usr/local/bin/
-
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+COPY conf/docker-entrypoint.sh /
 
 EXPOSE 3306
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["bash", "docker-entrypoint.sh"]
 
-CMD ["mysqld"]
