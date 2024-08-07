@@ -46,19 +46,18 @@ volumes:
   db-data:
     driver: local
     driver_opts:
-      device: data/mariadb
+      device: data/vol_maria
       type: none
       o: bind
       
   wordpress-data:
     driver: local
     driver_opts:
-      device: data/wordpress
+      device: data/vol_press
       type: none
       o: bind
 
 networks:
-  # The presence of these objects is sufficient to define them
   inception:
     driver: bridge
 

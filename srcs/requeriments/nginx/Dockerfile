@@ -8,4 +8,6 @@ RUN apt install nginx -y
 #copia minha conf para a conf padrao do nginx
 COPY conf/nginx.conf /etc/nginx/nginx.conf
 
+EXPOSE 443
+
 CMD ["nginx","-g","'daemon off;'"]
