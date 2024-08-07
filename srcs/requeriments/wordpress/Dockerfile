@@ -11,8 +11,11 @@ RUN wget https://wordpress.org/latest.tar.gz && tar -zxvf latest.tar.gz && mv wo
 
 RUN chown -R www-data:www-data * && chmod -R 755 * && mv wp-config-sample.php wp-config.php
 
-RUN sed -i 's/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/' /etc/php/7.4/fpm/php.ini
-
 EXPOSE 9000
 
-CMD ["php-fpm7.4", "--nodaemonize"]
+WORKDIR /
+
+COPY tools/docker-entrypoint.sh /
+
+ENTRYPOINT ["bash", "docker-entrypoint.sh" ]
+
