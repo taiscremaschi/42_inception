@@ -2,8 +2,9 @@
 mkdir -p /var/run/mysqld
 chown mysql:mysql /var/run/mysqld
 
-if [ ! -d "/var/lib/mysql/$DATABASE" ]; then
-    mysqld --initialize-insecure
+if [ ! -d "/var/lib/mysql/$DATABASE" ]; 
+then
+    mysqld&
 
     while ! mysqladmin ping --silent; do
         sleep 1
