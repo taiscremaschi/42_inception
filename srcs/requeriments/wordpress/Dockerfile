@@ -17,7 +17,7 @@ RUN chown -R www-data:www-data * && chmod -R 755 * && mv wp-config-sample.php wp
 
 EXPOSE 9000
 
-COPY conf/www.conf /etc/php/7.4/fpm/pool.debian
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 WORKDIR /
 
