@@ -6,7 +6,7 @@ services:
     restart: always
     ports:
       - "3306"
-    container_name: mari
+    container_name: mariadb
     env_file:
       - .env
     networks:
@@ -19,7 +19,7 @@ services:
     restart: always
     ports:
       - "443:443"
-    container_name: ginx
+    container_name: nginx
     depends_on:
       - wordpress
     env_file:
@@ -34,7 +34,7 @@ services:
     restart: always
     ports:
       - "9000:9000"
-    container_name: wp
+    container_name: wordpress
     depends_on:
       - mariadb
     env_file:
@@ -49,14 +49,14 @@ volumes:
   db-data:
     driver: local
     driver_opts:
-      device: data/vol_maria 
+      device: data/vol_mariadb
       type: none
       o: bind
       
   wordpress-data:
     driver: local
     driver_opts:
-      device: data/vol_press
+      device: data/vol_wordpress
       type: none
       o: bind
 
