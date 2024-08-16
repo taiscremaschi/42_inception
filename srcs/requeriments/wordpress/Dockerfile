@@ -15,8 +15,6 @@ RUN wget https://wordpress.org/latest.tar.gz && tar -zxvf latest.tar.gz && mv wo
 
 RUN chown -R www-data:www-data * && chmod -R 755 * && mv wp-config-sample.php wp-config.php
 
-EXPOSE 9000
-
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 WORKDIR /

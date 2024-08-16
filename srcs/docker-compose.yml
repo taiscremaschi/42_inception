@@ -5,7 +5,7 @@ services:
     build: requeriments/mariadb/
     restart: always
     ports:
-      - "3306"
+      - "3306:3306"
     container_name: mariadb
     env_file:
       - .env
