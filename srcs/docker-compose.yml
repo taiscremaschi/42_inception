@@ -1,18 +1,19 @@
+#A versao do meu docker compose 
 version: "3.7"
-
+#aqui defino meus serviços. o primeiro eh o maria db, que eh um banco de dados. 
 services:
   mariadb:
-    build: requeriments/mariadb/
-    restart: always
+    build: requeriments/mariadb/ #indica o tipo de imagem que eu vou utilizar no caso, eh o caminho pro meu dockerfile 
+    restart: always  # Configura o contêiner para reiniciar automaticamente se falhar ou se o Docker for reiniciado.
     ports:
-      - "3306:3306"
+      - "3306:3306" # "host_port:container_port"
     container_name: mariadb
-    env_file:
-      - .env
+    env_file: # Especifica o arquivo de ambiente que será carregado para configurar variáveis de ambiente no contêiner.
+      - .env  
     networks:
       - inception
-    volumes:
-      -  db-data:/var/lib/mysql
+    volumes: # Define os volumes para persistência de dados.
+      -  db-data:/var/lib/mysql # Mapeia o volume 'db-data' no host para o diretório '/var/lib/mysql' no contêiner, onde os dados do banco de dados serão armazenados.
     
   nginx:
     build: requeriments/nginx/
@@ -20,7 +21,7 @@ services:
     ports:
       - "443:443"
     container_name: nginx
-    depends_on:
+    depends_on: # Define a ordem de inicialização. Este contêiner depende do serviço WordPress.
       - wordpress
     env_file:
       - .env
@@ -45,24 +46,24 @@ services:
       -  wordpress-data:/var/www/html
 
 
-volumes:
-  db-data:
-    driver: local
-    driver_opts:
-      device: data/vol_mariadb
-      type: none
-      o: bind
-      
-  wordpress-data:
-    driver: local
-    driver_opts:
-      device: data/vol_wordpress
-      type: none
+volumes:  # Define os volumes que serão utilizados pelos contêineres.
+  db-data:  
+    driver: local  # Especifica o driver de volume 'local', que armazena dados no sistema de arquivos do host.
+    driver_opts:  # Opções do driver para configuração do volume.
+      device: data/vol_mariadb  # Especifica o caminho do diretório 'data/vol_mariadb' no host para ser utilizado como o volume.
+      type: none  # Indica que o caminho é um diretório no sistema de arquivos.
+      o: bind  # Utiliza a opção 'bind', que permite vincular o diretório do host ao volume do contêiner.
+
+  wordpress-data:  
+    driver: local 
+    driver_opts: 
+      device: data/vol_wordpress 
+      type: none 
       o: bind
 
-networks:
-  inception:
-    driver: bridge
+networks:  # Define as redes que serão utilizadas pelos contêineres.
+  inception:  # Define a rede 'inception', que será utilizada pelos serviços.
+    driver: bridge  # Especifica que a rede será do tipo 'bridge', o tipo padrão de rede no Docker, que permite a comunicação entre contêineres na mesma rede.
 
     
   
