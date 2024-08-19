@@ -11,9 +11,9 @@ RUN  mkdir -p /run/php
 
 WORKDIR /var/www/html
 
-RUN wget https://wordpress.org/latest.tar.gz && tar -zxvf latest.tar.gz && mv wordpress/* . && rm -rf wordpress
-
-RUN chown -R www-data:www-data * && chmod -R 755 * && mv wp-config-sample.php wp-config.php
+RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+&& chmod +x wp-cli.phar \
+&& mv wp-cli.phar /usr/local/bin/wp
 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
