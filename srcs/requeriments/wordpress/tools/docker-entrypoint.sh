@@ -9,8 +9,6 @@ if [ ! -e "/var/www/html/wp-config.php" ]; then
 	--admin_email="$ADMIN_EMAIL" --skip-email
 	wp user create --allow-root  $NORMAL_USER $NORMAL_EMAIL --user_pass=$NORMAL_PASS
 	chown -R www-data:www-data *
-else
-	echo "[wordpress:setup.sh] worpdress has already been set up!"
 
 fi
 
